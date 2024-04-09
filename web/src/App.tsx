@@ -83,6 +83,11 @@ debugData([
           },
         ],
       },
+      playerData: {
+        source: 12,
+        cash: 12523,
+        bank: 1255005,
+      },
     },
   },
 ]);
@@ -119,8 +124,8 @@ const App: React.FC = () => {
   );
 };
 
-addEventListener("dragstart", function(event) {
-  event.preventDefault()
-})
+addEventListener('dragstart', function (event) {
+  event.preventDefault();
+});
 
 export default App;

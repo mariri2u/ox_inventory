@@ -6,6 +6,8 @@ $secondaryColor: rgba(12, 12, 12, 0.4);
 $secondaryColorHighlight: #33343F;
 $secondaryColorLight: rgba(0, 0, 0, 0.5);
 $secondaryColorDark: rgba(12, 12, 12, 0.8);
+$accentColor: rgba(211, 84, 0, 0.8);
+$accentColorDark: rgba(211, 84, 0, 0.4);
 
 $gridCols: 5;
 $gridRows: 5;
@@ -146,16 +148,16 @@ button:active {
     outline: none;
     border: none;
     color: #fff;
-    background-color: $secondaryColor;
+    background-color: $accentColor;
     &:focus-within {
-      background-color: $secondaryColorDark;
+      background-color: $accentColorDark;
     }
   }
 
   .inventory-control-button {
     font-size: 14px;
     color: #fff;
-    background-color: $secondaryColor;
+    background-color: $accentColor;
     transition: 200ms;
     padding: 12px 8px;
     border-radius: 2.5%;
@@ -165,7 +167,7 @@ button:active {
     width: 100%;
     font-weight: 500;
     &:hover {
-      background-color: $secondaryColorDark;
+      background-color: $accentColorDark;
     }
   }
 }
@@ -296,9 +298,10 @@ button:active {
 }
 
 .inventory-slot-label-box {
-  background-color: $mainColor;
+  background-color: $accentColor;
   color: $textColor;
   text-align: center;
+  height: 20px;
   border-bottom-left-radius: 0.25vh;
   border-bottom-right-radius: 0.25vh;
   border-top-color: rgba(0, 0, 0, 0.2);
@@ -551,4 +554,33 @@ button:active {
 .transition-slide-up-exit-active {
   transform: translateY(200px);
   transition: all 200ms;
+}
+
+.playerdata {
+  display: flex;
+
+  .playerdata-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .playerdata-box {
+    transition: 200ms;
+    padding: 16px 8px;
+    border-radius: 2.5%;
+    font-family: $mainFont;
+    font-size: 16px;
+    text-align: center;
+    outline: none;
+    border: none;
+    color: #fff;
+    width: 100%;
+    background-color: $accentColor;
+    &:focus-within {
+      background-color: $accentColorDark;
+    }
+  }
 }

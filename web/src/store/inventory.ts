@@ -24,6 +24,11 @@ const initialState: State = {
     maxWeight: 0,
     items: [],
   },
+  playerData: {
+    source: 0,
+    cash: 0,
+    bank: 0,
+  },
   additionalMetadata: new Array(),
   itemAmount: 0,
   shiftPressed: false,
@@ -100,5 +105,6 @@ export const selectLeftInventory = (state: RootState) => state.inventory.leftInv
 export const selectRightInventory = (state: RootState) => state.inventory.rightInventory;
 export const selectItemAmount = (state: RootState) => state.inventory.itemAmount;
 export const selectIsBusy = (state: RootState) => state.inventory.isBusy;
+export const selectPlayerData = (state: RootState) => state.inventory.playerData;
 
 export default inventorySlice.reducer;

@@ -100,11 +100,34 @@ const InventorySlot: React.ForwardRefRenderFunction<HTMLDivElement, SlotProps> =
 
   const connectRef = (element: HTMLDivElement) => drag(drop(element));
 
+  const hasContext = (item: SlotWithItem) => {
+    if (item.metadata) {
+      const meta = item.metadata;
+      if (meta.ammo) {
+        return true;
+      } else if (meta.serial) {
+        return true;
+      } else if (meta.components && meta.components.length > 0) {
+        return true;
+      }
+    }
+    if (((item && item.name && Items[item.name]?.buttons?.length) || 0) > 0) {
+      return true;
+    }
+    return false;
+  };
+
   const handleContext = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
-    if (inventoryType !== 'player' || !isSlotWithItem(item)) return;
+    if (!isSlotWithItem(item)) return;
 
-    dispatch(openContextMenu({ item, coords: { x: event.clientX, y: event.clientY } }));
+    if (hasContext(item)) {
+      if (inventoryType == 'player') {
+        dispatch(openContextMenu({ item, coords: { x: event.clientX, y: event.clientY } }));
+      }
+    } else if (inventoryType !== 'shop' && inventoryType !== 'crafting') {
+      onDrop({ item: item, inventory: inventoryType });
+    }
   };
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -117,6 +140,12 @@ const InventorySlot: React.ForwardRefRenderFunction<HTMLDivElement, SlotProps> =
     }
   };
 
+  const handleDoubleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    dispatch(closeTooltip());
+    if (timerRef.current) clearTimeout(timerRef.current);
+    onUse(item);
+  };
+
   const refs = useMergeRefs([connectRef, ref]);
 
   return (
@@ -124,6 +153,7 @@ const InventorySlot: React.ForwardRefRenderFunction<HTMLDivElement, SlotProps> =
       ref={refs}
       onContextMenu={handleContext}
       onClick={handleClick}
+      onDoubleClick={handleDoubleClick}
       className="inventory-slot"
       style={{
         filter:
@@ -160,16 +190,18 @@ const InventorySlot: React.ForwardRefRenderFunction<HTMLDivElement, SlotProps> =
             <div className="item-slot-info-wrapper">
               <p>
                 {item.weight > 0
-                  ? item.weight >= 1000
-                    ? `${(item.weight / 1000).toLocaleString('en-us', {
-                        minimumFractionDigits: 2,
+                  ? item.weight >= 100
+                    ? `${(item.weight / 1000).toLocaleString('ja-JP', {
+                        minimumFractionDigits: 1,
+                        maximumFractionDigits: 1,
                       })}kg `
-                    : `${item.weight.toLocaleString('en-us', {
+                    : `${item.weight.toLocaleString('ja-JP', {
                         minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
                       })}g `
                   : ''}
               </p>
-              <p>{item.count ? item.count.toLocaleString('en-us') + `x` : ''}</p>
+              <p>{item.count ? item.count.toLocaleString('ja-JP') + `x` : ''}</p>
             </div>
           </div>
           <div>
