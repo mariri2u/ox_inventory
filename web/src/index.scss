@@ -2,12 +2,13 @@ $mainColor: #22232c;
 $textColor: #c1c2c5;
 $mainFont: Roboto;
 
-$secondaryColor: rgba(12, 12, 12, 0.4);
+$secondaryColor: rgba(204, 153, 255, 0.4);
 $secondaryColorHighlight: #33343F;
 $secondaryColorLight: rgba(0, 0, 0, 0.5);
-$secondaryColorDark: rgba(12, 12, 12, 0.8);
-$accentColor: rgba(211, 84, 0, 0.8);
-$accentColorDark: rgba(211, 84, 0, 0.4);
+$secondaryColorDark: rgba(204, 153, 255, 0.8);
+$accentColor: rgba(153, 51, 204, 0.8);
+$accentTextColor: #e6e6e6;
+$accentColorDark: rgba(153, 51, 204, 0.4);
 
 $gridCols: 5;
 $gridRows: 5;
@@ -291,7 +292,8 @@ button:active {
   image-rendering: -webkit-optimize-contrast;
   position: relative;
   background-size: 7vh;
-  color: $textColor;
+  font-size: 12px;
+  color: $accentTextColor;
   border-color: rgba(0, 0, 0, 0.2);
   border-style: inset;
   border-width: 1px;
@@ -579,8 +581,20 @@ button:active {
     color: #fff;
     width: 100%;
     background-color: $accentColor;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     &:focus-within {
       background-color: $accentColorDark;
     }
+  }
+
+  .playerdata-box-icon {
+    display: flex;
+    align-items: center;
+  }
+
+  .playerdata-box-text {
+    text-align: right;
   }
 }
