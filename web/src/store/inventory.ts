@@ -8,6 +8,7 @@ import {
   swapSlotsReducer,
 } from '../reducers';
 import { State } from '../typings';
+import { refreshPlayerReducer } from '../reducers/refreshPlayer';
 
 const initialState: State = {
   leftInventory: {
@@ -44,6 +45,7 @@ export const inventorySlice = createSlice({
     setupInventory: setupInventoryReducer,
     moveSlots: moveSlotsReducer,
     refreshSlots: refreshSlotsReducer,
+    refreshPlayer: refreshPlayerReducer,
     setAdditionalMetadata: (state, action: PayloadAction<Array<{ metadata: string; value: string }>>) => {
       const metadata = [];
 
@@ -99,6 +101,7 @@ export const {
   moveSlots,
   stackSlots,
   refreshSlots,
+  refreshPlayer,
   setContainerWeight,
 } = inventorySlice.actions;
 export const selectLeftInventory = (state: RootState) => state.inventory.leftInventory;
